@@ -1,0 +1,425 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> class_decl
+Rule 2     class_decl -> PUBLIC CLASS IDENTIFIER LBRACE method_decl RBRACE
+Rule 3     method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN LBRACE statements RBRACE
+Rule 4     parameter -> IDENTIFIER LBRACKET RBRACKET IDENTIFIER
+Rule 5     statements -> statement
+Rule 6     statements -> statement statements
+Rule 7     statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON
+Rule 8     statement -> IDENTIFIER EQUALS expression SEMICOLON
+Rule 9     statement -> IDENTIFIER SEMICOLON
+Rule 10    expression -> term
+Rule 11    expression -> term PLUS term
+Rule 12    term -> IDENTIFIER
+Rule 13    term -> NUMBER
+Rule 14    term -> STRING
+
+Terminals, with rules where they appear
+
+CLASS                : 2
+DOT                  : 7 7
+EQUALS               : 8
+IDENTIFIER           : 2 4 4 8 9 12
+LBRACE               : 2 3
+LBRACKET             : 4
+LPAREN               : 3 7
+MAIN                 : 3
+NUMBER               : 13
+OUT                  : 7
+PLUS                 : 11
+PRINTLN              : 7
+PUBLIC               : 2 3
+RBRACE               : 2 3
+RBRACKET             : 4
+RPAREN               : 3 7
+SEMICOLON            : 7 8 9
+STATIC               : 3
+STRING               : 7 14
+SYSTEM               : 7
+VOID                 : 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+class_decl           : 1
+expression           : 8
+method_decl          : 2
+parameter            : 3
+program              : 0
+statement            : 5 6
+statements           : 3 6
+term                 : 10 11 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . class_decl
+    (2) class_decl -> . PUBLIC CLASS IDENTIFIER LBRACE method_decl RBRACE
+
+    PUBLIC          shift and go to state 3
+
+    program                        shift and go to state 1
+    class_decl                     shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> class_decl .
+
+    $end            reduce using rule 1 (program -> class_decl .)
+
+
+state 3
+
+    (2) class_decl -> PUBLIC . CLASS IDENTIFIER LBRACE method_decl RBRACE
+
+    CLASS           shift and go to state 4
+
+
+state 4
+
+    (2) class_decl -> PUBLIC CLASS . IDENTIFIER LBRACE method_decl RBRACE
+
+    IDENTIFIER      shift and go to state 5
+
+
+state 5
+
+    (2) class_decl -> PUBLIC CLASS IDENTIFIER . LBRACE method_decl RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (2) class_decl -> PUBLIC CLASS IDENTIFIER LBRACE . method_decl RBRACE
+    (3) method_decl -> . PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN LBRACE statements RBRACE
+
+    PUBLIC          shift and go to state 7
+
+    method_decl                    shift and go to state 8
+
+state 7
+
+    (3) method_decl -> PUBLIC . STATIC VOID MAIN LPAREN parameter RPAREN LBRACE statements RBRACE
+
+    STATIC          shift and go to state 9
+
+
+state 8
+
+    (2) class_decl -> PUBLIC CLASS IDENTIFIER LBRACE method_decl . RBRACE
+
+    RBRACE          shift and go to state 10
+
+
+state 9
+
+    (3) method_decl -> PUBLIC STATIC . VOID MAIN LPAREN parameter RPAREN LBRACE statements RBRACE
+
+    VOID            shift and go to state 11
+
+
+state 10
+
+    (2) class_decl -> PUBLIC CLASS IDENTIFIER LBRACE method_decl RBRACE .
+
+    $end            reduce using rule 2 (class_decl -> PUBLIC CLASS IDENTIFIER LBRACE method_decl RBRACE .)
+
+
+state 11
+
+    (3) method_decl -> PUBLIC STATIC VOID . MAIN LPAREN parameter RPAREN LBRACE statements RBRACE
+
+    MAIN            shift and go to state 12
+
+
+state 12
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN . LPAREN parameter RPAREN LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 13
+
+
+state 13
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN LPAREN . parameter RPAREN LBRACE statements RBRACE
+    (4) parameter -> . IDENTIFIER LBRACKET RBRACKET IDENTIFIER
+
+    IDENTIFIER      shift and go to state 15
+
+    parameter                      shift and go to state 14
+
+state 14
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter . RPAREN LBRACE statements RBRACE
+
+    RPAREN          shift and go to state 16
+
+
+state 15
+
+    (4) parameter -> IDENTIFIER . LBRACKET RBRACKET IDENTIFIER
+
+    LBRACKET        shift and go to state 17
+
+
+state 16
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 18
+
+
+state 17
+
+    (4) parameter -> IDENTIFIER LBRACKET . RBRACKET IDENTIFIER
+
+    RBRACKET        shift and go to state 19
+
+
+state 18
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN LBRACE . statements RBRACE
+    (5) statements -> . statement
+    (6) statements -> . statement statements
+    (7) statement -> . SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON
+    (8) statement -> . IDENTIFIER EQUALS expression SEMICOLON
+    (9) statement -> . IDENTIFIER SEMICOLON
+
+    SYSTEM          shift and go to state 22
+    IDENTIFIER      shift and go to state 23
+
+    statements                     shift and go to state 20
+    statement                      shift and go to state 21
+
+state 19
+
+    (4) parameter -> IDENTIFIER LBRACKET RBRACKET . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 24
+
+
+state 20
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN LBRACE statements . RBRACE
+
+    RBRACE          shift and go to state 25
+
+
+state 21
+
+    (5) statements -> statement .
+    (6) statements -> statement . statements
+    (5) statements -> . statement
+    (6) statements -> . statement statements
+    (7) statement -> . SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON
+    (8) statement -> . IDENTIFIER EQUALS expression SEMICOLON
+    (9) statement -> . IDENTIFIER SEMICOLON
+
+    RBRACE          reduce using rule 5 (statements -> statement .)
+    SYSTEM          shift and go to state 22
+    IDENTIFIER      shift and go to state 23
+
+    statement                      shift and go to state 21
+    statements                     shift and go to state 26
+
+state 22
+
+    (7) statement -> SYSTEM . DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON
+
+    DOT             shift and go to state 27
+
+
+state 23
+
+    (8) statement -> IDENTIFIER . EQUALS expression SEMICOLON
+    (9) statement -> IDENTIFIER . SEMICOLON
+
+    EQUALS          shift and go to state 28
+    SEMICOLON       shift and go to state 29
+
+
+state 24
+
+    (4) parameter -> IDENTIFIER LBRACKET RBRACKET IDENTIFIER .
+
+    RPAREN          reduce using rule 4 (parameter -> IDENTIFIER LBRACKET RBRACKET IDENTIFIER .)
+
+
+state 25
+
+    (3) method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN LBRACE statements RBRACE .
+
+    RBRACE          reduce using rule 3 (method_decl -> PUBLIC STATIC VOID MAIN LPAREN parameter RPAREN LBRACE statements RBRACE .)
+
+
+state 26
+
+    (6) statements -> statement statements .
+
+    RBRACE          reduce using rule 6 (statements -> statement statements .)
+
+
+state 27
+
+    (7) statement -> SYSTEM DOT . OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON
+
+    OUT             shift and go to state 30
+
+
+state 28
+
+    (8) statement -> IDENTIFIER EQUALS . expression SEMICOLON
+    (10) expression -> . term
+    (11) expression -> . term PLUS term
+    (12) term -> . IDENTIFIER
+    (13) term -> . NUMBER
+    (14) term -> . STRING
+
+    IDENTIFIER      shift and go to state 31
+    NUMBER          shift and go to state 34
+    STRING          shift and go to state 35
+
+    expression                     shift and go to state 32
+    term                           shift and go to state 33
+
+state 29
+
+    (9) statement -> IDENTIFIER SEMICOLON .
+
+    SYSTEM          reduce using rule 9 (statement -> IDENTIFIER SEMICOLON .)
+    IDENTIFIER      reduce using rule 9 (statement -> IDENTIFIER SEMICOLON .)
+    RBRACE          reduce using rule 9 (statement -> IDENTIFIER SEMICOLON .)
+
+
+state 30
+
+    (7) statement -> SYSTEM DOT OUT . DOT PRINTLN LPAREN STRING RPAREN SEMICOLON
+
+    DOT             shift and go to state 36
+
+
+state 31
+
+    (12) term -> IDENTIFIER .
+
+    PLUS            reduce using rule 12 (term -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 12 (term -> IDENTIFIER .)
+
+
+state 32
+
+    (8) statement -> IDENTIFIER EQUALS expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 37
+
+
+state 33
+
+    (10) expression -> term .
+    (11) expression -> term . PLUS term
+
+    SEMICOLON       reduce using rule 10 (expression -> term .)
+    PLUS            shift and go to state 38
+
+
+state 34
+
+    (13) term -> NUMBER .
+
+    PLUS            reduce using rule 13 (term -> NUMBER .)
+    SEMICOLON       reduce using rule 13 (term -> NUMBER .)
+
+
+state 35
+
+    (14) term -> STRING .
+
+    PLUS            reduce using rule 14 (term -> STRING .)
+    SEMICOLON       reduce using rule 14 (term -> STRING .)
+
+
+state 36
+
+    (7) statement -> SYSTEM DOT OUT DOT . PRINTLN LPAREN STRING RPAREN SEMICOLON
+
+    PRINTLN         shift and go to state 39
+
+
+state 37
+
+    (8) statement -> IDENTIFIER EQUALS expression SEMICOLON .
+
+    SYSTEM          reduce using rule 8 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 8 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+    RBRACE          reduce using rule 8 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+
+
+state 38
+
+    (11) expression -> term PLUS . term
+    (12) term -> . IDENTIFIER
+    (13) term -> . NUMBER
+    (14) term -> . STRING
+
+    IDENTIFIER      shift and go to state 31
+    NUMBER          shift and go to state 34
+    STRING          shift and go to state 35
+
+    term                           shift and go to state 40
+
+state 39
+
+    (7) statement -> SYSTEM DOT OUT DOT PRINTLN . LPAREN STRING RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 41
+
+
+state 40
+
+    (11) expression -> term PLUS term .
+
+    SEMICOLON       reduce using rule 11 (expression -> term PLUS term .)
+
+
+state 41
+
+    (7) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN . STRING RPAREN SEMICOLON
+
+    STRING          shift and go to state 42
+
+
+state 42
+
+    (7) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 43
+
+
+state 43
+
+    (7) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 44
+
+
+state 44
+
+    (7) statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON .
+
+    SYSTEM          reduce using rule 7 (statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON .)
+    IDENTIFIER      reduce using rule 7 (statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON .)
+    RBRACE          reduce using rule 7 (statement -> SYSTEM DOT OUT DOT PRINTLN LPAREN STRING RPAREN SEMICOLON .)
+

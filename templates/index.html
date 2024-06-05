@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador Léxico y Sintáctico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Analizador Léxico y Sintáctico</h1>
+    </div>
+    <div class="container">
+        <form method="POST">
+            <textarea name="code" id="code" placeholder="Escribe tu código aquí...">{{ code }}</textarea>
+            <div class="button-container">
+                <button type="submit">Análisis Léxico y Sintáctico</button>
+            </div>
+        </form>
+        <div class="output">
+            <h2>Resultado Léxico</h2>
+            <pre id="lexicoResult">{{ lexical_result }}</pre>
+            <h2>Resultado Sintáctico</h2>
+            <pre id="sintacticoResult">{{ syntactic_result }}</pre>
+        </div>
+    </div>
+</body>
+</html>
